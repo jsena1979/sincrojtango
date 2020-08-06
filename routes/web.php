@@ -11,12 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/panel', function () {
-    return view('panel');
-})->name('panel');
+Route::get('/','PagesController@inicio');
+
+Route::get('/panel','PagesController@panel')->name('panel');
 
 Route::get('/procesos/{nombre?}', function ($nombre = null) {
     $proceso = ['Sincronizar Stock', 'Sincronizar Precios', 'Sincronizar Articulos'];
