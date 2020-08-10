@@ -1,19 +1,58 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
-    <title>Sincronizador</title>
-</head>
-<body>
-<div class="container my-4"></div>
-<h1 class="display-4">Pedidos enviados</h1>
+@extends('plantilla')
+@section('seccion')
+<h1 class="display-4">Consultas a la API</h1>
+@if (session('mensaje'))
+    <div class="alert alert-success">{{session('mensaje')}}</div>
+@endif
+<form method="POST" action="{{ route('consultasApi.crear') }}">
+    @csrf
+    @error('id_recurso')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        El Id_recurso es obligatorio
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
+    @error('ult_consulta_api')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Ultima consulta a la API es obligatorio
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    @enderror
+    @error('id_api')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        "id_api"  es obligatorio
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
+    <input
+        type="text"
+        name="id_recurso"
+        placeholder="id_recurso"
+        class="form-control mb-2"
+        value="{{old('id_recurso')}}"
+    />
+    <input
+        type="text"
+        name="ult_consulta_api"
+        placeholder="ult_consulta_api"
+        class="form-control mb-2"
+        value="{{old('ult_consulta_api')}}"
+    />
+    <input
+        type="text"
+        name="id_api"
+        placeholder="id_api"
+        class="form-control mb-2"
+        value="{{old('id_api')}}"
+    />
+    <button class="btn btn-primary btn-block" type="submit">Agregar</button>
+</form>
 <table class="table">
     <thead>
     <tr>
@@ -21,6 +60,7 @@
         <th scope="col">Recurso</th>
         <th scope="col">Última consulta</th>
         <th scope="col">Id API</th>
+        <th scope="col">Acciones</th>
     </tr>
     </thead>
     <tbody>
@@ -31,25 +71,13 @@
                     {{$item->id_recurso}}
                 </a></td>
             <td>
-                <a href="">{{$item->ult_consulta_api}}</a>
+                {{$item->ult_consulta_api}}
             </td>
             <td>{{$item->id_api}}</td>
-            <td>Editar</td>
+            <td><a href="{{route('consultasApi.editar',$item)}}" class="btn btn-warning btn-sm">Editar</a></td>
         </tr>
     @endforeach
     </tbody>
 </table>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+@endsection('seccion')

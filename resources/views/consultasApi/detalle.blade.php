@@ -1,4 +1,4 @@
-@extends('plantilla');
+@extends('plantilla')
 @section('seccion')
     <h1>Detalle de Consulta a  la API</h1>
     <h4>Id:{{$consultas->id}}</h4>

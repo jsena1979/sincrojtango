@@ -8,10 +8,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Sincronizador</title>
 </head>
 <body>
 <div class="container">
+    <a href="{{route('inicio')}}" class="btn btn-primary">Inicio</a>
     <a href="{{route('panel')}}" class="btn btn-primary">Panel Princial</a>
     <a href="{{route('proceso')}}" class="btn btn-primary">Procesos</a>
     <a href="{{route('pedidos')}}" class="btn btn-primary">Pedidos</a>
