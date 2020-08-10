@@ -1,25 +1,11 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/','PagesController@inicio');
+Route::get('/','PagesController@inicio')->name('inicio');
+Route::get('/{id}','PagesController@detalle')->name('consultasApi.detalle');
 
 Route::get('/panel','PagesController@panel')->name('panel');
 
-Route::get('/procesos/{nombre?}', function ($nombre = null) {
-    $proceso = ['Sincronizar Stock', 'Sincronizar Precios', 'Sincronizar Articulos'];
-    //return view('procesos',['proceso'=>$procesos,'nombre'=>$nombre]);
-    return view('procesos', compact('proceso','nombre'));
-})->name('proceso');
+Route::get('/procesos/{nombre?}', 'PagesController@procesos')->name('proceso');
 
 Route::get('/pedidos', function () {
     return view('pedidos');
