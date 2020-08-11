@@ -1,10 +1,10 @@
 @extends('plantilla')
 @section('seccion')
-    <h1>Editar Datos consulta de Recurso {{$consultas->id_recurso}}</h1>
+    <h1>Editar Datos consulta de Recurso {{$consultas->id}}</h1>
     @if (session('mensaje'))
         <div class="alert alert-success">{{session('mensaje')}}</div>
     @endif
-    <form method="POST" action="{{ route('consultasApi.update',$consultas->id_recurso) }}">
+    <form method="POST" action="{{ route('consultasApi.editar',$consultas->id) }}">
         @method('PUT')
         @csrf
         @error('id_recurso')

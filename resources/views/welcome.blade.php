@@ -74,10 +74,17 @@
                 {{$item->ult_consulta_api}}
             </td>
             <td>{{$item->id_api}}</td>
-            <td><a href="{{route('consultasApi.editar',$item)}}" class="btn btn-warning btn-sm">Editar</a></td>
+            <td>
+                <a href="{{route('consultasApi.editar',$item)}}" class="btn btn-warning btn-sm">Editar</a>
+                <form action="{{route('consultasApi.eliminar',$item)}}" method="POST" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                </form>
+            </td>
         </tr>
     @endforeach
     </tbody>
 </table>
-
+{{$consultasApi->links()}}
 @endsection('seccion')

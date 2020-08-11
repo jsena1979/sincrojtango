@@ -8,7 +8,7 @@ class PagesController extends Controller
 {
     //
     public function inicio(){
-        $consultasApi = App\ult_consulta_api::all();
+        $consultasApi = App\ult_consulta_api::paginate(1);
         return view('welcome',compact('consultasApi'));
     }
     public function crear(Request $request){
@@ -29,9 +29,23 @@ class PagesController extends Controller
         return view('consultasApi.editar',compact('consultas'));
     }
 
-    public function update($id){
-        $consultas = App\ult_consulta_api::findOrFail($id);
-        return view('consultasApi.editar',compact('consultas'));
+    public function update(Request $request,$id ){
+        $request->validate([
+            'id_recurso'=>'required',
+            'ult_consulta_api'=>'required',
+            'id_api'=>'required'
+        ]);
+        $consultaUp = App\ult_consulta_api::findOrFail($id);
+        $consultaUp->id_recurso = $request->id_recurso;
+        $consultaUp->ult_consulta_api = $request->ult_consulta_api;
+        $consultaUp->id_api = $request->id_api;
+        $consultaUp->save();
+        return back()->with('mensaje', 'Consulta Actualizada');
+    }
+    public function eliminar($id){
+        $consultaEliminar = App\ult_consulta_api::findOrFail($id);
+        $consultaEliminar->delete();
+        return back()->with('mensaje', 'Consulta a API Eliminada');
     }
     public function detalle($id){
         $consultas = App\ult_consulta_api::findOrFail($id);
